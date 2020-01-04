@@ -69,8 +69,10 @@ namespace ImageUtil
                     index++;
                 }
             }
+            var outRect = new RectangleF(0, 0, width, height);
+            var imgMerge2 = imgMerge.Clone(outRect, System.Drawing.Imaging.PixelFormat.Format4bppIndexed);
             var mergedbmp = input + ".merged.bmp";
-            imgMerge.Save(mergedbmp, System.Drawing.Imaging.ImageFormat.Bmp);
-        }
+            imgMerge2.Save(mergedbmp, System.Drawing.Imaging.ImageFormat.Bmp);
+         }
     }
 }
