@@ -48,6 +48,29 @@ namespace ImageUtil
                     index++;
                 }
             }
+
+
+            index = 1;
+            //var firstpath = Path.Combine(outdir, index.ToString() + ".bmp");
+            //var firstimg  = (Bitmap)Image.FromFile(firstpath);
+            //Bitmap imgMerge = new Bitmap(width, height);
+            var imgMerge = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(imgMerge);
+            for (var y = 0; y < height; y += sy)
+            {
+                for (var x = 0; x < width; x += sx)
+                {
+                    var outfile = Path.Combine(outdir, index.ToString() + ".bmp");
+                    using (var bmpTmp = (Bitmap)Image.FromFile(outfile))
+                    {
+                        var cloneRect = new RectangleF(x, y, sx, sy);
+                        g.DrawImage(bmpTmp, cloneRect);
+                    }
+                    index++;
+                }
+            }
+            var mergedbmp = input + ".merged.bmp";
+            imgMerge.Save(mergedbmp, System.Drawing.Imaging.ImageFormat.Bmp);
         }
     }
 }
